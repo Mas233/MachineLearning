@@ -9,7 +9,7 @@ def _fake_list(upperbound,max):
 if __name__=='__main__':
     img_path='./crane.jpg'
     clusters=3
-    iterations=5
+    iterations=15
     delta=0.0001
 
     width,height,img_array=imgToArray(img_path)

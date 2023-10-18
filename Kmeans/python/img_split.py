@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from KMeans import KMeans
+from KMeansDemo import KMeans
 # from sklearn.cluster import KMeans
 
 # the count of sections the image should be seperated

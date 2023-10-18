@@ -34,58 +34,58 @@ K-Means++优化了各簇中心点的选取：
 已将原始图片的宽高等比缩放之原来的25\%。
 
 \subsection{代码实现}
+\textit{仅列出代码实现原理，详细代码请参考源代码。}
 \lstset{
     language=python,
     frame=shadowbox,
     breaklines=true
 }
-首先利用cv2库读入图片，并利用numpy将图片转化为二维数组，其中每一行代表一个像素，包含RGB三个列的值。
+imgHandler实现利用pillow库从路径获取图片，并转为二维数组，其中第一维为像素点（按行排列），第二维为RGB信息；RGB信息统一除以255以作归一化处理并转为float类型。返回值为图像原始宽高以及numpy转化过后的二维数组。
 \begin{lstlisting}
-    # read the image
-    image = cv2.imread('crane.jpg')
+    # in imgHandler.py:
+    def imgToArray(path):
+        file=open(path,"rb")
+        img=pilImage.open(file)
+        imgData=[]
+        ...
+        return img_width,img_height,np.array(imgData)
+\end{lstlisting}
+此后利用K-Means++方法的思想来选出k个中心。在Version_1的实现并未利用概率来进行下一个点的选择，而是直接选择距离当前所有聚簇中心最远的点作为下一个点。在后来的评估中认为这么做可能会使某个孤立点单独成簇而缺失掉一个聚簇；
+在Version_2的实现中修复了该问题
+\begin{lstlisting}
+    # in KMeans.py:
+    def _getCenterIndex_Center_Dist(data,clusters):
+        ...
+        return centers,dist_to_centers
+\end{lstlisting}
+之后进行迭代，每次将所有点归类之离其最近的聚簇中心，并重新计算聚簇的平均值作为下一次迭代的相应聚簇中心。迭代终止条件为迭代数达到目标值或所有聚簇中心的改变（delta）小到某一个特定值。返回值为一个掩码数组，每个位置代表当前像素的所属分组。
+\begin{lstlisting}
+    # in KMeans.py:
+    while epoch<iterations:
+        # epoch++
+        # updating centers
+        # if centers don't change, then break
+        # update labels
+    return labels
+\end{lstlisting}
+最后将原始图片的数组配合掩码分别生成对应组的子图片，并存于同一目录下。
+\begin{lstlisting}
+    # in imgHandler.py
+    def arrayToImg(data,mask,path):
+        # init img group
+        # put pixels
+        # generate outputs
     
-    # break the image into 2D array
-    pixels = image.reshape(-1, 3)
 \end{lstlisting}
-然后创建KMeans对象，并利用fit方法和predict方法得到聚类后的结果。
-\begin{lstlisting}
-    kmeans = KMeans(n_clusters=cluster_cnt)
-    kmeans.fit(pixels)
-    labels = kmeans.predict(pixels)
-\end{lstlisting}
-最后将聚类后的结果转化为图片，并保存和展示。
-\begin{lstlisting}
-    # reconstructed segmented image
-    segmented_image = labels.reshape(image.shape[0], image.shape[1])
 
-    segments=[]
-
-    for i in range(cluster_cnt):
-        segments.append(np.copy(image))
-        segments[i][segmented_image != i] = 0
-
-    # display and save the segmented images
-    for i in range(cluster_cnt):
-        cv2.imshow('Segment '+str(i), segments[i])
-        cv2.imwrite('Segment '+str(i)+'.png', segments[i])
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-\end{lstlisting}
 \subsection{结果展示}
 聚类结果：
-\subsubsection{clusters=2, iterations=300}
-使用KMeans.py实现。\\
-\includegraphics[width=0.5\textwidth]{src/it=300_0.png}
-\includegraphics[width=0.5\textwidth]{src/it=300_1.png}\\
+\subsubsection{Version=1,clusters=3, iterations=50, delta=0.0001}
+实际运行至第9次迭代后输出结果。
+\includegraphics[width=0.33\textwidth]{src/i9d1e-4section1.png}
+\includegraphics[width=0.33\textwidth]{src/i9d1e-4section2.png}
+\includegraphics[width=0.33\textwidth]{src/i9d1e-4section3.png}\\
+
 \subsubsection{clusters=2, iterations=3000}
-使用KMeans.py实现。\\
-\includegraphics[width=0.5\textwidth]{src/it=3000_0.png}
-\includegraphics[width=0.5\textwidth]{src/it=3000_1.png}\\
-\subsubsection{clusters=3, iterations=default}
-使用sklearn库实现。\\
-\includegraphics[width=0.33\textwidth]{src/sklearn_0.png}
-\includegraphics[width=0.33\textwidth]{src/sklearn_1.png}
-\includegraphics[width=0.33\textwidth]{src/sklearn_2.png}\\
-\subsubsection{问题}
-sklearn库中的KMeans默认采用Lloyd算法，距离计算采用欧氏距离；而KMeans.py中的KMeans调用向量取模函数，在距离算法上应该与其相同，但结果却与sklearn库大相径庭。可能是在选点和迭代条件上有约束？
+
 \end{document}

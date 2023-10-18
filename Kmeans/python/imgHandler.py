@@ -2,7 +2,7 @@ import PIL.Image as pilImage
 import numpy as np
 
 
-def imgToArray(path):
+def img_to_array(path):
     file=open(path,"rb")
     img=pilImage.open(file)
     img_width,img_height=img.size
@@ -18,7 +18,7 @@ def imgToArray(path):
     return img_width,img_height,np.array(imgData)
 
 
-def arrayToImg(data,mask,path):
+def array_to_imgs(data,mask,path):
     img_height=data.shape[0]
     img_width=data.shape[1]
     imgs=[pilImage.new('RGB',(img_width,img_height)) for _ in range(int(np.amax(mask))+1)]

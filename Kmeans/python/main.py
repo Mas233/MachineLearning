@@ -1,12 +1,20 @@
 from KMeans import KMeans
 from imgHandler import *
+def _fake_list(upperbound,max):
+    list =[]
+    for i in range(upperbound):
+        list.append(np.random.randint(0,max))
+    return list
 
 if __name__=='__main__':
     img_path='./crane.jpg'
     clusters=3
-    iterations=50
+    iterations=5
     delta=0.0001
 
-    img_array=imgToArray(img_path)
+    width,height,img_array=imgToArray(img_path)
     labels=KMeans(img_array,clusters,iterations,delta)
-    arrayToImg(img_array,labels)
+
+    img_array=img_array.reshape((height,width,-1))
+    labels=np.array(labels).reshape((height,width,-1))
+    arrayToImg(img_array,labels,'.')

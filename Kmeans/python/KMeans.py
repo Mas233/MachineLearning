@@ -1,6 +1,6 @@
 from copy import deepcopy
 import numpy as np
-
+from tqdm import tqdm
 
 def _getDist(vec1,vec2):
     v1=np.mat(vec1)
@@ -26,6 +26,7 @@ def KMeans(data,clusters=3,iterations=300,max_delta=0.0001):
         center_delta=0
         # recalculate the centers
         last_centers=deepcopy(centers)
+        print(f'running the {epoch}th iteration')
         for i in range(clusters):
             centers[i]=np.mean(data[labels==i],axis=0)
             center_delta+=_getDist(centers[i],last_centers[i])
@@ -33,11 +34,14 @@ def KMeans(data,clusters=3,iterations=300,max_delta=0.0001):
         if center_delta <= max_delta:break;
 
         # recalculate the distance
+        progress_bar=tqdm(total=samples)
         for i in range(samples):
+            progress_bar.update(1)
+            progress_bar.set_description(f'Progress:{i}/{samples}')
             for j in range(clusters):
                 dist[i][j]=_getDist(data[i],centers[j])
         labels=np.argmin(dist,axis=1)
-
+        progress_bar.close()
     return labels
 
 

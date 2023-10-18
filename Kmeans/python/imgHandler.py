@@ -1,5 +1,7 @@
 import PIL.Image as pilImage
 import numpy as np
+
+
 def imgToArray(path):
     file=open(path,"rb")
     img=pilImage.open(file)
@@ -14,6 +16,7 @@ def imgToArray(path):
             imgData.append([r,g,b])
     file.close()
     return img_width,img_height,np.array(imgData)
+
 
 def arrayToImg(data,mask,path):
     img_height=data.shape[0]

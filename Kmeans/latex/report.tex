@@ -80,12 +80,24 @@ imgHandler实现利用pillow库从路径获取图片，并转为二维数组，�
 
 \subsection{结果展示}
 聚类结果：
-\subsubsection{Version=1,clusters=3, iterations=50, delta=0.0001}
-实际运行至第9次迭代后输出结果。
+\subsubsection{Version=1, clusters=3, iterations=50, delta=0.0001}
+实际运行至第9次迭代后输出结果。\\
 \includegraphics[width=0.33\textwidth]{src/i9d1e-4section1.png}
 \includegraphics[width=0.33\textwidth]{src/i9d1e-4section2.png}
 \includegraphics[width=0.33\textwidth]{src/i9d1e-4section3.png}\\
 
-\subsubsection{clusters=2, iterations=3000}
+\subsubsection{Version=1, clusters=4, iterations=50, delta=0.00001}
+实际运行至第17次迭代后输出结果。\\
+\includegraphics[width=0.5\textwidth]{src/i17d1e-5section1.png}
+\includegraphics[width=0.5\textwidth]{src/i17d1e-5section2.png}\\
+\includegraphics[width=0.5\textwidth]{src/i17d1e-5section3.png}
+\includegraphics[width=0.5\textwidth]{src/i17d1e-5section4.png}\\
 
+\subsubsection{Version=1, clusters=3, iterations=15, delta=0.0001}
+实际运行至第n次迭代后输出结果。\\
+\includegraphics[width=0.33\textwidth]{src/}
+\includegraphics[width=0.33\textwidth]{src/}
+\includegraphics[width=0.33\textwidth]{src/}\\
+\subsection{问题}
+仅将RGB值的相似度作为聚簇依据，而没有考虑图片距聚簇中心的距离的因素。使得分出的类只有数值意义而实际意义不大。
 \end{document}

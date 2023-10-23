@@ -77,5 +77,6 @@ def depth_range_dtree_compare(lower_bound=3,upper_bound=12,random_state=42):
     plt.savefig(f"result/compare_{lower_bound}_to_{upper_bound}.png",dpi=300)
     print('Done visualizing comparison. \n')
 
+
 if __name__ == '__main__':
     depth_range_dtree_compare(4,12,random_state=41)

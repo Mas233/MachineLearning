@@ -1,13 +1,56 @@
 \documentclass{article}
 \usepackage{ctex}
 \usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cyan,
+    filecolor=blue,
+    urlcolor=blue
+}
 
-\title{DTree\_Titanic}
+\title{基于Titanic数据集的决策树算法实践}
 \author{王铭嵩}
 \date{\today}
 
 \begin{document}
 \maketitle
 \newpage
-\
+\section{数据分析与处理}
+数据来源为Kaggle的\href{'https://www.kaggle.com/datasets/vinicius150987/titanic3'}{The Complete Titanic Dataset}数据集。
+源文件为一个包含舱位、年龄、性别、是否幸存等信息的csv文件，共有1309条数据。\\
+\includegraphics[width=1.0\textwidth]{code_screenshot/datasrc.png}\\
+读入数据后清除了年龄、配偶兄弟姐妹数目、父母子女数目信息缺失的条目，并选择舱位、性别、年龄、配偶兄弟姐妹数目、父母子女数目作为特征，是否幸存作为预测目标。\\
+\includegraphics[width=1.0\textwidth]{code_screenshot/dataclean.png}\\
+\section{决策树原理与代码}
+决策树通过递进的属性判断对样本进行划分，并采用一定的度量标准来决定每一次划分所基于的属性。度量标准一般包括信息增益、信息增益率以及基尼指数，对应ID3决策树，C4.5决策树和CART决策树算法。\\
+叶节点采用递归方式生成，达到最大深度或者样本数目小于阈值时停止递归。\\
+代码如下，采用scikit-learn库实现。用信息增益作为纯度指标。\\
+\includegraphics[width=1.0\textwidth]{code_screenshot/DTreeMain.png}\\
+\section{验证集评估结果}
+分别在最大树高度4到12的情况下对决策树进行评估。验证集为F1-Micro和F1-Macro。以下为各最大树高条件下的各验证集测量值。\\
+\includegraphics[width=0.9\textwidth]{../python/result/compare_4_to_12.png}\\
+\section{决策树可视化}
+\subsection{最大树高度为4}
+\includegraphics[width=1.0\textwidth]{../python/result/tree_dep=4_rand=41.png}\\
+\includegraphics[width=1.0\textwidth]{../python/result/score_dep=4_rand=41.png}\\
+\subsection{最大树高度为5}
+\includegraphics[width=1.0\textwidth]{../python/result/tree_dep=5_rand=41.png}\\
+\includegraphics[width=1.0\textwidth]{../python/result/score_dep=5_rand=41.png}\\
+\subsection{部分其他树高决策树及其评估结果}
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=6_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=6_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=7_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=7_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=8_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=8_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=9_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=9_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=10_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=10_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=11_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=11_rand=41.png}\\
+\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=12_rand=41.png}
+\includegraphics[width=0.5\textwidth]{../python/result/score_dep=12_rand=41.png}\\
+
 \end{document}

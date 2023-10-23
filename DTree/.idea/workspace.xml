@@ -5,35 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f3ca06-92de-4245-8e04-d828a2c572a8" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/DTree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DTree.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DTree.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DecisionTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TreeNode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Passenger.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/DTree.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/DecisionTree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/TreeNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/data/Passenger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/data/test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/data/titanic3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/data/train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/utils/DataReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/utils/Destination.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DTree/utils/NodeType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/DataReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Destination.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/NodeType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTree.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/titanic3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/train.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +42,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -73,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/code/machine_learning/DTree",
+    "last_opened_file_path": "D:/code/machine_learning/DTree/python",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,6 +63,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\machine_learning\DTree" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.DTree">
     <configuration name="DataReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="utils.DataReader" />
@@ -140,6 +123,9 @@
       <workItem from="1698043919616" duration="135000" />
       <workItem from="1698044064892" duration="115000" />
       <workItem from="1698044193772" duration="1632000" />
+      <workItem from="1698047945808" duration="740000" />
+      <workItem from="1698049035192" duration="406000" />
+      <workItem from="1698049457231" duration="133000" />
     </task>
     <servers />
   </component>
@@ -150,6 +136,6 @@
     <option featureType="com.intellij.configurationType" implementationName="Application" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DTree$DTree.coverage" NAME="DTree 覆盖结果" MODIFIED="1698045795806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DTree$DTree.coverage" NAME="DTree 覆盖结果" MODIFIED="1698048593828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

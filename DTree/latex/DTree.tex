@@ -2,10 +2,19 @@
 \usepackage{ctex}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    right=20mm,
+    top=40mm,
+    bottom=35mm
+}
 \hypersetup{
     colorlinks=true,
     linkcolor=cyan,
-    filecolor=blue,
+    filecolor=cyan,
     urlcolor=blue
 }
 
@@ -29,28 +38,17 @@
 \includegraphics[width=1.0\textwidth]{code_screenshot/DTreeMain.png}\\
 \section{验证集评估结果}
 分别在最大树高度4到12的情况下对决策树进行评估。验证集为F1-Micro和F1-Macro。以下为各最大树高条件下的各验证集测量值。\\
-\includegraphics[width=0.9\textwidth]{../python/result/compare_4_to_12.png}\\
+\includegraphics[width=0.85\textwidth]{../python/result/compare_4_to_12.png}\\
 \section{决策树可视化}
 \subsection{最大树高度为4}
+仅显示部分最大树高度下的可视化。完整可视化图片可在\href{'../python/result/'}{../python/result}目录下查看。\\
 \includegraphics[width=1.0\textwidth]{../python/result/tree_dep=4_rand=41.png}\\
-\includegraphics[width=1.0\textwidth]{../python/result/score_dep=4_rand=41.png}\\
-\subsection{最大树高度为5}
-\includegraphics[width=1.0\textwidth]{../python/result/tree_dep=5_rand=41.png}\\
-\includegraphics[width=1.0\textwidth]{../python/result/score_dep=5_rand=41.png}\\
-\subsection{部分其他树高决策树及其评估结果}
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=6_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=6_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=7_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=7_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=8_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=8_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=9_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=9_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=10_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=10_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=11_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=11_rand=41.png}\\
-\includegraphics[width=0.5\textwidth]{../python/result/tree_dep=12_rand=41.png}
-\includegraphics[width=0.5\textwidth]{../python/result/score_dep=12_rand=41.png}\\
+\includegraphics[width=0.7\textwidth]{../python/result/score_dep=4_rand=41.png}\\
+\subsection{最大树高度为9}
+\includegraphics[width=1.0\textwidth]{../python/result/tree_dep=9_rand=41.png}\\
+\includegraphics[width=0.7\textwidth]{../python/result/score_dep=9_rand=41.png}\\
+\subsection{最大树高度为12}
+\includegraphics[width=1.0\textwidth]{../python/result/tree_dep=12_rand=41.png}\\
+\includegraphics[width=0.7\textwidth]{../python/result/score_dep=12_rand=41.png}\\
 
 \end{document}

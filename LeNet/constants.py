@@ -2,7 +2,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 
-MAX_TRAIN=50
+MAX_TRAIN=200
 
 
 class DATASET:

@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{ctex}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{geometry}
 \geometry{
     a4paper,
@@ -26,7 +26,7 @@
 \maketitle
 \newpage
 \section{数据分析与处理}
-数据来源为Kaggle的\href{'https://www.kaggle.com/datasets/vinicius150987/titanic3'}{The Complete Titanic Dataset}数据集。
+数据来源为Kaggle的\href{https://www.kaggle.com/datasets/vinicius150987/titanic3}{The Complete Titanic Dataset}数据集。
 源文件为一个包含舱位、年龄、性别、是否幸存等信息的csv文件，共有1309条数据。\\
 \includegraphics[width=1.0\textwidth]{code_screenshot/datasrc.png}\\
 读入数据后清除了年龄、配偶兄弟姐妹数目、父母子女数目信息缺失的条目，并选择舱位、性别、年龄、配偶兄弟姐妹数目、父母子女数目作为特征，是否幸存作为预测目标。\\
@@ -40,7 +40,7 @@
 分别在最大树高度4到12的情况下对决策树进行评估。验证集为F1-Micro和F1-Macro。以下为各最大树高条件下的各验证集测量值。\\
 \includegraphics[width=0.85\textwidth]{../python/result/compare_4_to_12.png}\\
 \section{决策树可视化}
-仅显示部分最大树高度下的可视化。完整可视化图片可在\href{'../python/result/'}{../python/result}目录下查看。\\
+仅显示部分最大树高度下的可视化。完整可视化图片可在\href{run:../python/result/}{../python/result}目录下查看。\\
 \subsection{最大树高度为4}
 \begin{center}
     \includegraphics[width=1.0\textwidth]{../python/result/tree_dep=4_rand=41.png}\\

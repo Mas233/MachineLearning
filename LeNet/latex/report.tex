@@ -3,7 +3,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
-\title{神经网络实验}
+\title{神经网络实验：LeNet-5}
 \author{王铭嵩}
 \date{\today}
 
@@ -11,5 +11,14 @@
 \maketitle
 \newpage
 \section{神经网络基本原理}
-卷积神经网络主要由卷积层、池化层、全连接层构成。卷积层通过对输入图像进行卷积操作来提取图像特征
+卷积神经网络主要由卷积层、池化层、全连接层构成。卷积层通过对输入图像进行卷积操作来提取图像特征。池化层对输入的特征图片进行压缩，简化网络计算复杂度。全连接层连接所有的特征，并将输出值送给分类器。
+
+\section{LeNet-5基本结构}
+\subsection{输入层}
+用以接收输入的图像数据。在CIFAR10数据集上，输入为32x32x3的图像数据。图像长宽为32，以及RGB三个颜色通道。
+\subsection{卷积层1}
+
 \end{document}
+% 参考：
+% https://blog.csdn.net/yjl9122/article/details/70198357
+% https://zhuanlan.zhihu.com/p/616996325

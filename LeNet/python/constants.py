@@ -2,18 +2,28 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 
-MAX_TRAIN=55
+MAX_TRAIN=50
 BATCH_SIZE=64
 CHANNEL_1=6
-CHANNEL_2=16
+CHANNEL_2=24
 FC_COUNT=3
+TEST_GAP=5
+GRAY='#A0A0A0'
+DEFAULT_COLOR='#228B22'
 
-class DATASET:
+
+class Dataset:
+    _instance=None
+
+    def __new__(cls,*args,**kwargs):
+        if not cls._instance:
+            cls._instance=super(Dataset,cls).__new__(cls,*args,**kwargs)
+        return cls._instance
 
     def __init__(self):
         transform = transforms.Compose(
-            [transforms.ToTensor(),
-             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+            [transforms.ToTensor(), # transforms the image data to tensor
+             transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]) # normalize RGB to [0,1]
 
         self.train_set = torchvision.datasets.CIFAR10(root='./data', train=True,
                                                       download=True, transform=transform)

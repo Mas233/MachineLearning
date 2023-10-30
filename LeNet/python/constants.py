@@ -5,7 +5,7 @@ import torchvision.transforms as transforms
 MAX_TRAIN=50
 BATCH_SIZE=64
 CHANNEL_1=6
-CHANNEL_2=24
+CHANNEL_2=16
 FC_COUNT=3
 TEST_GAP=5
 GRAY='#A0A0A0'

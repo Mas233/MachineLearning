@@ -26,7 +26,7 @@ class LeNet5(nn.Module):
         x = x.view(-1, self.channel2 * 25)
         x = Func.relu(self.fc1(x))
         x = Func.relu(self.fc2(x))
-        for i in len(self.fc):
+        for i in range(len(self.fc)):
             x = Func.relu(self.fc[i](x))
         x = self.fc3(x)
         return x

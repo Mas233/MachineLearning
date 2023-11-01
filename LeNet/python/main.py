@@ -32,7 +32,7 @@ def compare_fc_layers(max_layer=4):
     for i in range(3,max_layer+1):
         fc_layer.append(i)
         net=LeNet5(fc_count=i)
-        test_result=net.train_and_test(MAX_TRAIN+200*(i-3))
+        test_result=net.train_and_test(MAX_TRAIN+100*(i-3))
         max_acc=max(test_result,key=lambda x:x[1])
         max_accuracy.append(max_acc)
     _visualize_args_accuracy(fc_layer,max_accuracy,'FC layers','fc_compare_result.png')
@@ -101,10 +101,7 @@ def _visualize_args_accuracy(arg_arr, accuracies, arg_name, path):
 
 
 if __name__ == '__main__':
-    default_test()
-    adjusted_test()
-    compare_max_trains(100)
     compare_fc_layers(5)
-    compare_channel2(24)
+
 
 

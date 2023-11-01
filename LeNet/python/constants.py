@@ -2,7 +2,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 
-MAX_TRAIN=50
+MAX_TRAIN=60
 BATCH_SIZE=64
 CHANNEL_1=6
 CHANNEL_2=16

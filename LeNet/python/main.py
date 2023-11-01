@@ -38,13 +38,13 @@ def compare_fc_layers(max_layer=4):
     _visualize_args_accuracy(fc_layer,max_accuracy,'FC layers','fc_compare_result.png')
 
 
-def compare_channel2(max_channel=32):
+def compare_channels(max_channel=32,step=4):
     channel=[]
     max_accuracy=[]
-    for i in range(16,max_channel+1,8):
+    for i in range(16,max_channel+step-1,step):
         channel.append(i)
-        net=LeNet5(channel2=i)
-        test_result=net.train_and_test(MAX_TRAIN+50*(i-16)//8)
+        net=LeNet5(channel1=CHANNEL_1+2*((i-16)//step),channel2=i)
+        test_result=net.train_and_test(MAX_TRAIN+50*(i-16))
         max_acc=max(test_result,key=lambda x:x[1])
         max_accuracy.append(max_acc)
     _visualize_args_accuracy(channel,max_accuracy,'Feature Channels','channel2_compare_result.png')
@@ -58,7 +58,7 @@ def default_test():
 
 
 def adjusted_test():
-    net=LeNet5(channel1=6,channel2=24,fc_count=4)
+    net=LeNet5(channel1=6,channel2=32,fc_count=5)
     test_result=net.train_and_test(250,10)
     best_acc=max(test_result,key=lambda x:x[1])
     net=LeNet5(channel1=6,channel2=24,fc_count=4)
@@ -82,8 +82,12 @@ def _visualize_classes_accuracy(total, accuracies, path):
     plt.xlabel('Classes')
     plt.ylabel('Accuracy/%')
     plt.ylim(0,100)
+
+    _custom_adjust_x_axis(classes)
+
     plt.legend()
     plt.savefig(path,dpi=300)
+
 
 def _visualize_args_accuracy(arg_arr, accuracies, arg_name, path):
     plt.figure(figsize=(6,4))
@@ -95,13 +99,24 @@ def _visualize_args_accuracy(arg_arr, accuracies, arg_name, path):
     plt.ylabel('Accuracy/%')
     plt.ylim(0,100)
     plt.xlabel(arg_name)
-    plt.xlim(min(arg_arr) - 1, max(arg_arr) + 1)
+
+    _custom_adjust_x_axis(arg_arr)
+
     plt.legend()
-    plt.savefig(path,dpi=300)
+    # plt.savefig(path,dpi=300)
+    plt.show()
+
+
+# adjust ticks on x-axis
+def _custom_adjust_x_axis(arr):
+    x_ticks=arr
+    x_ticks.insert(0,min(arr)-1)
+    x_ticks.append(max(arr) + 1)
+    plt.xticks(x_ticks)
+    plt.gca().get_xaxis().get_major_ticks()[0].label1.set_visible(False)
+    plt.gca().get_xaxis().get_major_ticks()[-1].label1.set_visible(False)
 
 
 if __name__ == '__main__':
-    compare_fc_layers(5)
-
-
+    compare_channels(40)
 

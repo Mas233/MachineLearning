@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as Func
+import numpy as np
 from constants import *
 
 
@@ -53,6 +54,7 @@ class LeNet5(nn.Module):
         accuracies=[]
         for epoch in range(max_epochs):
             running_loss = 0.0
+            low_avg_case=0
             for i, data in enumerate(self.dataset.train_loader, 0):
                 inputs, labels = data
                 optimizer.zero_grad()
@@ -61,10 +63,15 @@ class LeNet5(nn.Module):
                 loss.backward()
                 optimizer.step()
                 running_loss += loss.item()
-            print(f"Epoch {epoch + 1}, Loss: {running_loss / len(self.dataset.train_loader):.6f}")
+            print(f"Epoch {epoch + 1}, Loss: {running_loss / len(self.dataset.train_loader):.7f}")
             if (epoch + 1) % gap == 0:
                 acc,_=self.test()
                 accuracies.append((epoch+1,acc))
+                # avoid over-fitting
+                if (len(accuracies)>9)and(np.mean([x[1] for x in accuracies[-9:-6]])>np.mean([x[1] for x in accuracies[-5:-2]])):
+                    low_avg_case+=1
+                    if low_avg_case>1:
+                        break
         print("Training Finished")
         return accuracies
 

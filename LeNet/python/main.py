@@ -103,8 +103,7 @@ def _visualize_args_accuracy(arg_arr, accuracies, arg_name, path):
     _custom_adjust_x_axis(arg_arr)
 
     plt.legend()
-    # plt.savefig(path,dpi=300)
-    plt.show()
+    plt.savefig(path,dpi=300)
 
 
 # adjust ticks on x-axis
@@ -119,4 +118,5 @@ def _custom_adjust_x_axis(arr):
 
 if __name__ == '__main__':
     compare_channels(40)
+    compare_fc_layers(7)
 

@@ -52,9 +52,9 @@ class LeNet5(nn.Module):
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         accuracies=[]
+        low_avg_case=0
         for epoch in range(max_epochs):
             running_loss = 0.0
-            low_avg_case=0
             for i, data in enumerate(self.dataset.train_loader, 0):
                 inputs, labels = data
                 optimizer.zero_grad()
@@ -67,11 +67,18 @@ class LeNet5(nn.Module):
             if (epoch + 1) % gap == 0:
                 acc,_=self.test()
                 accuracies.append((epoch+1,acc))
+
                 # avoid over-fitting
-                if (len(accuracies)>9)and(np.mean([x[1] for x in accuracies[-9:-6]])>np.mean([x[1] for x in accuracies[-5:-2]])):
-                    low_avg_case+=1
-                    if low_avg_case>1:
-                        break
+                if (len(accuracies)>7):
+                    last_mean = np.mean([x[1] for x in accuracies[-7:-5]])
+                    this_mean = np.mean([x[1] for x in accuracies[-3:-1]])
+                    print(f'last_mean:{last_mean:.2f}% this_mean:{this_mean:.2f}%')
+                    if(last_mean>=this_mean):
+                        low_avg_case+=1
+                        print(f'{low_avg_case} low cases')
+                        if low_avg_case>1:
+                            break
+
         print("Training Finished")
         return accuracies
 

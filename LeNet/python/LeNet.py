@@ -18,7 +18,6 @@ class LeNet5(nn.Module):
             self.fc.append(nn.Linear(84,84))
         self.fc3=nn.Linear(84, 10)
         self.channel2=channel2
-        self.dataset=Dataset()
         print(f'Init completed with channel1={channel1},channel2={channel2},fc_count={len(self.fc)+3}')
 
     def forward(self, x):
@@ -37,7 +36,7 @@ class LeNet5(nn.Module):
         optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         for epoch in range(max_epochs):
             running_loss = 0.0
-            for i, data in enumerate(self.dataset.train_loader, 0):
+            for i, data in enumerate(TRAIN_LOADER, 0):
                 inputs, labels = data
                 optimizer.zero_grad()
                 outputs = self.forward(inputs)
@@ -45,17 +44,17 @@ class LeNet5(nn.Module):
                 loss.backward()
                 optimizer.step()
                 running_loss += loss.item()
-            print(f"Epoch {epoch + 1}, EntropyLoss: {running_loss / len(self.dataset.train_loader):.6f}")
+            print(f"Epoch {epoch + 1}, EntropyLoss: {running_loss / len(TRAIN_LOADER):.6f}")
         print("Training Finished")
 
-    def train_and_test(self,max_epochs=MAX_TRAIN,gap=TEST_GAP):
+    def train_and_test(self,max_epochs=MAX_TRAIN,gap=TEST_GAP,train_loader=TRAIN_LOADER):
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         accuracies=[]
         low_avg_case=0
         for epoch in range(max_epochs):
             running_loss = 0.0
-            for i, data in enumerate(self.dataset.train_loader, 0):
+            for i, data in enumerate(train_loader, 0):
                 inputs, labels = data
                 optimizer.zero_grad()
                 outputs = self.forward(inputs)
@@ -63,7 +62,7 @@ class LeNet5(nn.Module):
                 loss.backward()
                 optimizer.step()
                 running_loss += loss.item()
-            print(f"Epoch {epoch + 1}, Loss: {running_loss / len(self.dataset.train_loader):.7f}")
+            print(f"Epoch {epoch + 1}, Loss: {running_loss / len(train_loader):.7f}")
             if (epoch + 1) % gap == 0:
                 acc,_=self.test()
                 accuracies.append((epoch+1,acc))
@@ -82,12 +81,12 @@ class LeNet5(nn.Module):
         print("Training Finished")
         return accuracies
 
-    def test(self):
+    def test(self,test_loader=TEST_LOADER):
+        accuracies=[]
         class_correct = list(0. for _ in range(10))
         class_total = list(0. for _ in range(10))
-        accuracies=[]
         with torch.no_grad():
-            for data in self.dataset.test_loader:
+            for data in test_loader:
                 inputs, labels = data
                 outputs = self(inputs)
                 _, predicted = torch.max(outputs, 1)
@@ -98,14 +97,9 @@ class LeNet5(nn.Module):
                     label = labels[i]
                     class_correct[label] += c[i].item()
                     class_total[label] += 1
-
-        # Calculate and print the accuracy for each class.
         for i in range(10):
-            accuracy = 100 * class_correct[i] / class_total[i]
-            print(f'Accuracy of {self.dataset.classes[i]}: {accuracy:.2f}%')
-            accuracies.append((self.dataset.classes[i],accuracy))
-
-        # Calculate and print the overall accuracy.
-        total_accuracy = 100 * sum(class_correct) / sum(class_total)
-        print(f'Overall accuracy: {total_accuracy:.2f}%')
+            accuracies.append((CLASSES[i],class_correct[i]*100.0/class_total[i]))
+            print(f'  {accuracies[i][0]} accuracy: {accuracies[i][1]:.2f}%')
+        total_accuracy=sum(class_correct)*100.0/sum(class_total)
+        print(f'Total accuracy:{total_accuracy:.2f}%')
         return total_accuracy,accuracies

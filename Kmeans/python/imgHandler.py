@@ -31,3 +31,15 @@ def array_to_imgs(data,mask,path):
     for i, img in enumerate(imgs):
         img.show()
         img.save(path+f'/section{i+1}.png')
+
+
+def array_to_single_img(data,mask,path):
+    img_height = data.shape[0]
+    img_width = data.shape[1]
+    img=pilImage.new('RGB',(img_width,img_height))
+    for y in range(img_height):
+        for x in range(img_width):
+            pixel=data[y,x]*255
+            group_index=mask[y,x]
+            img.putpixel((x,y),)
+            # TODO:put the pixels with different color to one single img

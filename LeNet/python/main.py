@@ -46,7 +46,7 @@ def compare_channels(max_channel=32,step=4,max_entities=MAX_ENTITIES):
         nets=[LeNet5(channel1=CHANNEL_1+2*((i-16)//step),channel2=i) for _ in range(max_entities)]
         test_results=[nets[j].train_and_test(MAX_TRAIN+50*(i-16)) for j in range(max_entities)]
         max_accuracy.append(_get_avg_max_accuracy(test_results,max_entities))
-    _visualize_args_accuracy(channel,max_accuracy,'Feature Channels','channel2_compare_result_test.png')
+    _visualize_args_accuracy(channel,max_accuracy,'Feature Channels','channel2_compare_result.png')
 
 
 def default_test():
@@ -142,3 +142,4 @@ def _get_avg_max_accuracy(results,max_entities):
 if __name__ == '__main__':
     default_test()
     compare_channels(40,4)
+    compare_fc_layers(6)

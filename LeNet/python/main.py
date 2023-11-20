@@ -31,7 +31,7 @@ def compare_fc_layers(max_layer=4,max_entities=MAX_ENTITIES):
     fc_layer=[i for i in range(3,max_layer+1)]
     max_accuracy=[]
     for i in fc_layer:
-        nets=[LeNet5(fc_count=i) for _ in range(max_entities)]
+        nets=[LeNet5(fc_count=i,channel1=CHANNEL_1+(i-3)*2,channel2=CHANNEL_2+16*(i-3)) for _ in range(max_entities)]
         test_results=[nets[j].train_and_test(MAX_TRAIN+100*(i-3)) for j in range(max_entities)]
         max_accs=[max(test_results[j],key=lambda x:x[1]) for j in range(max_entities)]
         max_acc=(sum([x[0] for x in max_accs])/max_entities,sum([x[1] for x in max_accs])/max_entities)
@@ -53,14 +53,12 @@ def default_test():
     _batch_test(path='default_result.png')
 
 
-def adjusted_test(channel1=6,channel2=32,fc_count=4,max_entities=MAX_ENTITIES):
-    net=LeNet5(channel1=channel1,channel2=channel2,fc_count=fc_count)
-    test_result=net.train_and_test(250,10)
-    best_acc=max(test_result,key=lambda x:x[1])
+def adjusted_test(channel1=18,channel2=40,fc_count=4,max_entities=MAX_ENTITIES):
+
     _batch_test(channel1=channel1,
                 channel2=channel2,
                 fc_count=fc_count,
-                max_train=int(best_acc[0]),
+                max_train=45,
                 max_entities=max_entities,
                 path='adjusted_result.png')
 
@@ -140,6 +138,5 @@ def _get_avg_max_accuracy(results,max_entities):
 
 
 if __name__ == '__main__':
-    default_test()
-    compare_channels(40,4)
+    adjusted_test()
     compare_fc_layers(6)

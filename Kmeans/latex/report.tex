@@ -30,9 +30,11 @@ K-Means++优化了各簇中心点的选取：
 \section{实验过程}
 \subsection{图片输入}
 输入图片：\\
+crane.jpg \\
 \includegraphics[width=1.0\textwidth]{../python/crane.jpg}\\
-已将原始图片的宽高等比缩放之原来的25\%。
-
+已将原始图片的宽高等比缩放之原来的25\%。\\
+ramen.jpg \\
+\includegraphics[width=0.5\textwidth]{../python/ramen.jpg}\\
 \subsection{代码实现}
 \textit{仅列出代码实现原理或部分代码，详细代码请参考源代码。}\\
 \lstset{
@@ -83,7 +85,8 @@ imgHandler实现利用pillow库从路径获取图片，并转为二维数组，�
 \end{lstlisting}
 
 \subsection{结果展示}
-聚类结果：
+聚类结果：\\
+crane.jpg
 \subsubsection{Version=1, clusters=3, iterations=50, delta=0.0001}
 实际运行至第9次迭代后输出结果。\\
 \includegraphics[width=0.33\textwidth]{src/i9d1e-4section1.png}
@@ -102,6 +105,8 @@ imgHandler实现利用pillow库从路径获取图片，并转为二维数组，�
 \includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section1.png}
 \includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section2.png}
 \includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section3.png}\\
+ramen.jpg\\
+
 \section{思考}
 仅将RGB值的相似度作为聚簇依据，而没有考虑图片距聚簇中心的距离的因素。使得分出的类只有数值意义而实际意义不大。在考虑距离时或许应该构造空间信息和颜色信息的一个函数，从而使聚类更有实际意义。
 \end{document}

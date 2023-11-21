@@ -2,39 +2,46 @@
 \usepackage{graphicx}
 \usepackage{ctex}
 \usepackage{listings}
+\usepackage{geometry}
 
 
 \title{基于K-Means算法的图像分割}
 \author{王铭嵩}
 \date{\today}
 
+\geometry{a4paper,left=2.4cm,right=2.4cm,top=3cm,bottom=3cm}
+
+
 \begin{document}
 \maketitle
-\section{K-Means算法概述}
-\subsection{原理}
-K-Means算法是一种无监督分类算法，该算法的任务是将无标签数据集聚类成k个簇，利用贪心策略求得近似解。
-具体步骤为：
-\begin{enumerate}
-    \item 在样本集中随机选取$k$个样本作为初始各簇中心点$\mu_{i}$。
-    \item 计算所有样本点与各个簇中心之间的距离，并将其划入最近的簇中。
-    \item 根据簇中已有的样本点，重新计算簇中心$\mu_{i}=\frac{1}{|C_{i}|}\sum_{x\in{C{i}}}x$
-    \item 重复2，3.
-\end{enumerate}
-\subsection{优化}
-K-Means++优化了各簇中心点的选取：
-\begin{enumerate}
-    \item 随机选取一个样本点作为第一个簇中心$\mu_1$,
-    \item 计算剩余样本点与所有簇中心的最短距离，$D(x^{(i)})=min[dist(x^{(i)},C_j)|j=1,2,...,n]$，某样本点被选为下一个簇中心的概率为$\frac{D(x^{(i)})^2}{\Sigma D(x^{(j)})^2}$,
-    \item 重复2，直到选出k个簇中心。
-\end{enumerate}
+\begin{newpage}
+    \section{K-Means算法概述}
+    \subsection{原理}
+    K-Means算法是一种无监督分类算法，该算法的任务是将无标签数据集聚类成k个簇，利用贪心策略求得近似解。
+    具体步骤为：
+    \begin{enumerate}
+        \item 在样本集中随机选取$k$个样本作为初始各簇中心点$\mu_{i}$。
+        \item 计算所有样本点与各个簇中心之间的距离，并将其划入最近的簇中。
+        \item 根据簇中已有的样本点，重新计算簇中心$\mu_{i}=\frac{1}{|C_{i}|}\sum_{x\in{C{i}}}x$
+        \item 重复2，3.
+    \end{enumerate}
+    \subsection{优化}
+    K-Means++优化了各簇中心点的选取：
+    \begin{enumerate}
+        \item 随机选取一个样本点作为第一个簇中心$\mu_1$,
+        \item 计算剩余样本点与所有簇中心的最短距离，$D(x^{(i)})=min[dist(x^{(i)},C_j)|j=1,2,...,n]$，某样本点被选为下一个簇中心的概率为$\frac{D(x^{(i)})^2}{\Sigma D(x^{(j)})^2}$,
+        \item 重复2，直到选出k个簇中心。
+    \end{enumerate}
+\end{newpage}
 \section{实验过程}
 \subsection{图片输入}
 输入图片：\\
-crane.jpg \\
-\includegraphics[width=1.0\textwidth]{../python/crane.jpg}\\
-已将原始图片的宽高等比缩放之原来的25\%。\\
-ramen.jpg \\
-\includegraphics[width=0.5\textwidth]{../python/ramen.jpg}\\
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{../python/crane.jpg}\\
+    \textbf{crane.jpg}\\
+    \includegraphics[width=0.5\textwidth]{../python/ramen.jpg}\\
+    \textbf{ramen.jpg}\\
+\end{center}
 \subsection{代码实现}
 \textit{仅列出代码实现原理或部分代码，详细代码请参考源代码。}\\
 \lstset{
@@ -52,6 +59,7 @@ imgHandler实现利用pillow库从路径获取图片，并转为二维数组，�
         ...
         return img_width,img_height,np.array(imgData)
 \end{lstlisting}
+\begin{newpage}
 此后利用K-Means++方法的思想来选出k个中心。在Version\_1的实现并未利用概率来进行下一个点的选择，而是直接选择距离当前所有聚簇中心最远的点作为下一个点。在后来的评估中认为这么做可能会使某个孤立点单独成簇而缺失掉一个聚簇；
 在Version\_2的实现中修复了该问题。
 \begin{lstlisting}
@@ -83,30 +91,70 @@ imgHandler实现利用pillow库从路径获取图片，并转为二维数组，�
         # generate outputs
     
 \end{lstlisting}
-
-\subsection{结果展示}
-聚类结果：\\
-crane.jpg
-\subsubsection{Version=1, clusters=3, iterations=50, delta=0.0001}
-实际运行至第9次迭代后输出结果。\\
-\includegraphics[width=0.33\textwidth]{src/i9d1e-4section1.png}
-\includegraphics[width=0.33\textwidth]{src/i9d1e-4section2.png}
-\includegraphics[width=0.33\textwidth]{src/i9d1e-4section3.png}\\
-
-\subsubsection{Version=1, clusters=4, iterations=50, delta=0.00001}
-实际运行至第17次迭代后输出结果。\\
-\includegraphics[width=0.5\textwidth]{src/i17d1e-5section1.png}
-\includegraphics[width=0.5\textwidth]{src/i17d1e-5section2.png}\\
-\includegraphics[width=0.5\textwidth]{src/i17d1e-5section3.png}
-\includegraphics[width=0.5\textwidth]{src/i17d1e-5section4.png}\\
-
-\subsubsection{Version=2, clusters=3, iterations=15, delta=0.0001}
-实际运行至第15次迭代后输出结果。\\
-\includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section1.png}
-\includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section2.png}
-\includegraphics[width=0.33\textwidth]{src/v2_i15d1e-4section3.png}\\
-ramen.jpg\\
-
+\end{newpage}
+\begin{newpage}
+    \newcommand{\gap}{4pt}
+    \subsection{结果展示}
+    \begin{center}
+        \begin{minipage}{0.9\linewidth}
+            
+            \begin{minipage}{0.5\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{../python/crane.jpg}}
+                \centerline{original}
+            \end{minipage}
+            \begin{minipage}{0.5\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{src/crane_c3_output.png}}
+                \centerline{k=3}
+            \end{minipage}\\
+        
+            \begin{minipage}{0.5\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{src/crane_c4_output.png}}
+                \centerline{k=4}
+            \end{minipage}
+            \begin{minipage}{0.5\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{src/crane_c5_output.png}}
+                \centerline{k=5}
+            \end{minipage}\\
+            \centerline{\textbf{crane.jpg}}
+        \end{minipage}\\
+    \end{center}
+    \begin{center}
+        \begin{minipage}{0.8\textwidth}
+        \begin{minipage}{0.3\linewidth}
+            \vspace{\gap}
+            \centerline{\includegraphics[width=\textwidth]{../python/ramen.jpg}}
+            \centerline{original}
+        \end{minipage}
+        \begin{minipage}{0.3\linewidth}
+            \vspace{\gap}
+            \centerline{\includegraphics[width=\textwidth]{src/ramen_c3_output.png}}
+            \centerline{k=3}
+        \end{minipage}
+        \begin{minipage}{0.3\linewidth}
+            \vspace{\gap}
+            \centerline{\includegraphics[width=\textwidth]{src/ramen_c4_output.png}}
+            \centerline{k=4}
+        \end{minipage}\\
+        \begin{center}
+            \begin{minipage}{0.3\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{src/ramen_c5_output.png}}
+                \centerline{k=5}
+            \end{minipage}
+            \begin{minipage}{0.3\linewidth}
+                \vspace{\gap}
+                \centerline{\includegraphics[width=\textwidth]{src/ramen_c6_output.png}}
+                \centerline{k=6}
+            \end{minipage}\\
+            \textbf{ramen.jpg}\\
+        \end{center}
+    \end{minipage}
+    \end{center}
+\end{newpage}
 \section{思考}
-仅将RGB值的相似度作为聚簇依据，而没有考虑图片距聚簇中心的距离的因素。使得分出的类只有数值意义而实际意义不大。在考虑距离时或许应该构造空间信息和颜色信息的一个函数，从而使聚类更有实际意义。
+仅将RGB值的相似度作为聚簇依据，而没有考虑图片距聚簇中心的距离的因素。使得分出的类只有数值意义。在考虑距离时或许应该构造空间信息和颜色信息的一个函数，从而使聚类更有实际意义。
 \end{document}

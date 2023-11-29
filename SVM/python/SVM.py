@@ -14,12 +14,14 @@ def get_sv_hp(X,Y):
     clf = svm.SVC(kernel='linear')
     clf.fit(X, Y)
 
-    # 获取支持向量
+    # 获取支持向量并输出
     support_vectors = clf.support_vectors_
+    print(support_vectors)
 
-    # 获取超平面参数
+    # 获取超平面参数并输出
     w = clf.coef_
     b = clf.intercept_
+    print(f"w={w},b={b}")
 
     # 可视化数据和超平面
     plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
